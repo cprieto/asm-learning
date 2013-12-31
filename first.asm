@@ -1,7 +1,7 @@
 ; This is my first assembly program
 ; It asks for two integers and print back their sum
 
-%include "asm_io.inc"
+%include "inc/asm_io.inc"
 
 segment .data
 
@@ -13,8 +13,8 @@ outmsg3 db ", the sum of these is ", 0
 
 segment .bss
 
-input1 read 1
-input2 read 1
+input1 resd 1
+input2 resd 1
 
 segment .text
 	global asm_main
