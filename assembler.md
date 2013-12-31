@@ -27,9 +27,11 @@ This, my friends, is a very old CPU. It is like the grand grand father of your c
 
 This CPU provides _4 general purpose 16bit registers: AX, BX, CX, DX_
 Those general purpose registers can be divided in two 8bit registers, so AX can be divided in AH and AL, BX in BH and BL, and so on. AH will contain the higher 8 bits of AX and AL the lower 8 bits. Setting AX will basically change both AH and AL and changing any of both will change AX. Simple! What would you put in those registers? well, they are _general purpose_ so as long as it fit, you can put whatever you want.
+
 We have as well _2 16bit index registers_ SI and DI. They cannot be decomposed in two 8bit registers as the general purpose registers. Wait, but what are they used for? well, theorically they are used as storage for _pointers_ but nothing stops you from using them like general purpose registers.
 
 Now, we have two very special _16bit registers, BP and SP_. They are used to point to stack data, yes, machine code stack data. They are very special. Their names come from _"Base Pointer and Stack Pointer"_. We will mention them later.
+
 Now, we need to mention another 4 16 bit registers. _CS, DS, SS and ES_ they are used to point to _point to segmented memory addresses_. CS is the **Code Segment**, DS is the **Data Segment**, SS stands for the **Stack Segment**, ES contains the **Extra Segment** that is basically just temporary data that probably you will use/need. These registers are the heart of the 64KB segmented memory model in the 8088/8086 Intel CPU. The idea is simple, you store the data, code and stack in different segments so you need to contain the base address for those segments in registers just to know where to get or put the stuff.
 
 Another important register is _IP or Instruction Pointer_ which is used together with the CS register to keep track of which one is the next instruction to execute.
@@ -53,4 +55,7 @@ This processor add two important things:
  * 32bit registers.
 
 The memory model still segmented.
-We have now 32 bit general purpose registers. Now AX became EAX, BX is EBX, CX is ECX and DX became EDX. You can continue using the 16bit registers but you will access the 16bit lower part (in the same way you were using AL) but not to the upper part.
+We have now 32 bit general purpose registers. Now AX became EAX, BX is EBX, CX is ECX and DX became EDX. You can continue using the 16bit registers but you will access the 16bit lower part (in the same way you were using AL) but not to the upper part. We have 32 bit index registers as well: ESI and EDI. We have extended versions of the other registers (EBP, ESP, EFLAGS, EBP and ESP) but they only exist in protected mode. There were two additional segment registers (GS and FS) and they work the same as ES (so they don't have any special function, they just lay there waiting for somebody to use them).
+
+Ok, something important is the use of _word_, it describes the size of a register. In the original 8088/8086 it was 16bit wide but in 80286 it is 32bit but Intel decided to use the same meaning, weird thing.
+
