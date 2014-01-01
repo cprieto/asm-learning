@@ -59,3 +59,40 @@ We have now 32 bit general purpose registers. Now AX became EAX, BX is EBX, CX i
 
 Ok, something important is the use of _word_, it describes the size of a register. In the original 8088/8086 it was 16bit wide but in 80286 it is 32bit but Intel decided to use the same meaning, weird thing.
 
+
+## Operations, decreasing
+This is kind of easy, decreasing a number we just truncate the bits we don't want, for example:
+```
+mov ax, 0034h  ; put 52 in 16bit AX
+mov cl, al     ; Truncate the first 8 bits and put into CL
+```
+
+## Operations, increasing
+For unsigned numbers in 16bit registers is easy, just fill it with zeroes:
+```
+mov ah, 0      ; put 00 into upper part of ax
+```
+For unsigned numbers in 32bit registers is a little more tricky, because there is no way to access the upper 16bit of a 32bit register. So we have **MOVZX** and for 80286 the equivalent is **MOVSX**
+```
+movzx eax, ax  ; extend value in AX and put into EAX
+movzx ebx, ah  ; extend value in AH and put into EBX
+movzx ax, bl   ; extend value in BL and put into AX
+```
+
+Now, _for signed numbers_ the thing is not that simple. So we have specific instructions used with implicit registers. For 8086/8088 we have: **CBW** and **CWD**
+```
+cbw            ; convert AL into AX
+cwd            ; convert AX into DX:AX
+```
+For our newer friends with 32bit registers we have: **CWDE** and **CWQ**
+```
+cwde           ; convert AX into EAX
+cwq            ; convert EAX into EDX:EAX
+```
+## Operations, multiplication
+We have two friends here, **MUL** and **IMUL**, the first for unsigned numbers and the second for signed numbers:
+```
+mul el      ; multiply EL by AL and put result in AX
+mul bx      ; multiply BX by AX and put result in DX:AX
+
+```
