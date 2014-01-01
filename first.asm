@@ -38,15 +38,15 @@ asm_main:
 	add eax, [input2]
 	mov ebx, eax
 
-	mov eax, [outmsg1]
+	mov eax, outmsg1
 	call print_string
 	mov eax, [input1]
 	call print_int
-	mov eax, [outmsg2]
+	mov eax, outmsg2
 	call print_string
 	mov eax, [input2]
 	call print_int
-	mov eax, [outmsg3]
+	mov eax, outmsg3
 	call print_string
 	mov eax, ebx
 	call print_int
