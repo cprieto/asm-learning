@@ -4,7 +4,6 @@
 
 segment .data
 message db "Find primes up to: ", 0
-debug   db "bah? ", 0
 
 segment .bss
 limit resd 1
@@ -41,6 +40,7 @@ while_factor:
 	mov edx, 0
 	mul ebx                   ; edx:eax = ebx * ebx 
 	jo end_while_factor       ; last operation doesn't fit in eax alone
+
 	cmp eax, [guess]
 	jnbe end_while_factor     ; (factor * factor) > guess
 	mov eax, [guess]
@@ -56,12 +56,13 @@ end_while_factor:
 	div ebx
 	cmp edx, 0
 	je end_if
-	mov eax, guess
+	mov eax, [guess]
 	call print_int
 	call print_nl
 
 end_if:
 	add dword [guess], 2
+	jmp start_guess
 	
 end_guess:
 	popa
