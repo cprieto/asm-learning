@@ -20,14 +20,15 @@ asm_main:
 	call read_int
 	mov ebx, eax          ; EBX has the limit
 	mov ecx, 1            ; ECX is our counter
+
 when_start:
-	cmp ecx, ebx
-	je when_finish
 	mov eax, output
 	call print_string
 	mov eax, ecx
 	call print_int
 	call print_nl
+	cmp ecx, ebx
+	jge when_finish
 	add ecx, 1
 	jmp when_start
 
