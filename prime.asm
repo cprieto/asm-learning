@@ -4,6 +4,7 @@
 
 segment .data
 message db "Find primes up to: ", 0
+debug   db "bah? ", 0
 
 segment .bss
 limit resd 1
@@ -33,7 +34,7 @@ asm_main:
 start_guess:
 	mov eax, [guess]
 	cmp eax, [limit]
-	jbe end_guess
+	jnbe end_guess
 	mov ebx, 3                ; factor = 3
 
 while_factor:
